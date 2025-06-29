@@ -14,7 +14,7 @@ pipeline {
 
         stage('Setup') {
             steps {
-                sh '''
+                bat '''
                 python3 -m venv ${VENV}
                 source ${VENV}/bin/activate
                 pip install --upgrade pip
@@ -25,7 +25,7 @@ pipeline {
 
         stage('Test') {
             steps {
-                sh '''
+                bat '''
                 source ${VENV}/bin/activate
                 pytest tests/
                 '''
