@@ -9,4 +9,4 @@ def test_valid_login():
 def test_wrong_password_login():
     fake_db.clear()
     create_user("bob", "secret")
-    assert authenticate_user("bob", "wrongpass") is True  # ❌ Change to False to fix
+    assert authenticate_user("bob", "wrongpass") is False  # ❌ Change to False to fix
