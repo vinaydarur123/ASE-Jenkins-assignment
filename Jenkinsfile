@@ -1,10 +1,6 @@
 pipeline {
     agent any
 
-    environment {
-        VENV = ".venv"
-    }
-
     stages {
         stage('Checkout') {
             steps {
@@ -15,9 +11,6 @@ pipeline {
         stage('Setup') {
             steps {
                 bat '''
-                python -m venv ${VENV}
-                source ${VENV}/bin/activate
-                pip install --upgrade pip
                 pip install -r requirements.txt
                 '''
             }
@@ -26,7 +19,7 @@ pipeline {
         stage('Test') {
             steps {
                 bat '''
-                source ${VENV}/bin/activate
+                set PYTHONPATH=.
                 pytest tests/
                 '''
             }
