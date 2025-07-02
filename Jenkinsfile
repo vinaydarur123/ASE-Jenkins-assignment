@@ -1,6 +1,11 @@
 pipeline {
     agent any
 
+    environment {
+        PATH = "C:\\Windows\\System32;${env.PATH}"
+        PYTHONPATH = "."
+    }
+
     stages {
         stage('Checkout') {
             steps {
@@ -11,6 +16,7 @@ pipeline {
         stage('Setup') {
             steps {
                 bat '''
+                python -m pip install --upgrade pip
                 pip install -r requirements.txt
                 '''
             }
@@ -19,7 +25,6 @@ pipeline {
         stage('Test') {
             steps {
                 bat '''
-                set PYTHONPATH=.
                 pytest tests/
                 '''
             }
